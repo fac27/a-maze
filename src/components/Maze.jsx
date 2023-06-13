@@ -10,7 +10,9 @@ export default function Maze() {
                             // player if exists at the coords
                             <div
                                 key={`${rowIndex},${cellIndex}`}
-                                className={`cell ${cell === 1 ? 'wall' : ''}`}
+                                className={`cell ${
+                                    cell === 1 ? 'wall' : 'path'
+                                }`}
                             >
                                 {cell == 0 ? ' ' : cell}
                             </div>

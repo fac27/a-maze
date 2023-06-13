@@ -51,7 +51,6 @@
 }
 
 .cell {
-    background-color: white;
     width: 25px;
     height: 25px;
 }
@@ -59,4 +58,8 @@
 .wall {
     background-color: black;
     color: transparent;
+}
+
+.path {
+    background-color: white;
 }
