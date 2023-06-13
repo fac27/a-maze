@@ -17,6 +17,7 @@ module.exports = {
         'react/style-prop-object': 'warn',
         'react/jsx-no-useless-fragment': 'warn',
         'react/jsx-no-undef': 'warn',
-        'no-shadow': 'warn'
+        'no-shadow': 'warn',
+        'react/prop-types': 'off',
     },
 }
