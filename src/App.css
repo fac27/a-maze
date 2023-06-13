@@ -56,12 +56,12 @@
 }
 
 .wall {
-    background-color: black;
+    background-color: rgb(93, 29, 29);
     color: transparent;
 }
 
 .path {
-    background-color: white;
+    background-color: green;
 }
 
 .player {
