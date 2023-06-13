@@ -1,8 +1,12 @@
+import { useContext } from 'react'
+import {UserContext} from '../Context.js'
 
-const Player = ({emoji})=>{
+const Player = () =>{
+    const [user] = useContext(UserContext)
+    console.log(user.emoji)
     return (
         <div>
-            <p>{emoji}</p>
+            <p>{user.emoji}</p>
         </div>
     )
 }
