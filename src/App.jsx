@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Maze from './components/Maze.jsx'
 import './App.css'
 import Header from './components/Header'
@@ -12,8 +12,15 @@ function App() {
         emoji: `👿`,
     })
     const [position, setPosition] = useState({ row: 0, column: 0 })
+    const [startTime, setStartTime] = useState(null)
+    const started = useRef(false) 
+
     function movePlayer() {
         const handleKeyUp = (e) => {
+            if (!started.current) {
+                setStartTime(new Date())
+                started.current = true
+            }
             // Define a mapping between keys and actions
             const keyMap = {
                 ArrowUp: { row: position.row -1, column: position.column },
@@ -50,7 +57,7 @@ function App() {
         <UserContext.Provider value={[user, setUser]}>
             <Header />
             <Maze position={position} />
-            <Footer />
+            <Footer startTime={startTime}/>
         </UserContext.Provider>
     )
 }
