@@ -41,13 +41,22 @@
     color: #888;
 }
 
-/* .maze-wrapper {} */
+.maze-wrapper {
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+}
 
 .row {
     display: flex;
 }
 
 .cell {
-    width: 16px;
-    height: 16px;
+    background-color: white;
+    width: 25px;
+    height: 25px;
+}
+
+.wall {
+    background-color: black;
+    color: transparent;
 }
