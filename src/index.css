@@ -1,5 +1,6 @@
+@import url('https://fonts.cdnfonts.com/css/arcade-classic');
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'ArcadeClassic', sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
@@ -25,10 +26,20 @@ a:hover {
 
 body {
     margin: 0;
+}
+.flex-center {
     display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex-center .name {
+    margin-left: 10px;
+}
+.flex-center .score {
+    margin-right: 10px;
+}
+.grey-background{
+    background-color: #535252;
 }
 
 h1 {
