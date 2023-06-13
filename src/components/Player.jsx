@@ -5,7 +5,7 @@ const Player = () =>{
     const [user] = useContext(UserContext)
     console.log(user.emoji)
     return (
-        <div>
+        <div className='cell player'>
             <p>{user.emoji}</p>
         </div>
     )

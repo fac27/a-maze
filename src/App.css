@@ -63,3 +63,8 @@
 .path {
     background-color: white;
 }
+
+.player {
+    line-height: 0px;
+    /* text-align: center; */
+}

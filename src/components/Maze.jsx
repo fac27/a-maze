@@ -7,7 +7,7 @@ export default function Maze() {
     const [user] = useContext(UserContext)
 
     const userCheckPosition = (row, rowIndex, column, columnIndex) =>{
-        if(user.row === row && user.column === column){
+        if(user.row === rowIndex && user.column === columnIndex){
            return <Player/> 
         } else {
             return  <div key={`${rowIndex},${columnIndex}`} className={`cell ${column === 1 ? 'wall' : 'path'}`}>
