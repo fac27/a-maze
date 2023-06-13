@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Maze from './components/Maze.jsx'
 import './App.css'
 
 function App() {
@@ -6,8 +7,8 @@ function App() {
 
     return (
         <>
-
             <h1>Vite + React</h1>
+            <Maze />
             <div className="card">
                 <button onClick={() => setCount((count) => count + 1)}>
                     count is {count}

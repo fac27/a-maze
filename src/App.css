@@ -40,3 +40,14 @@
 .read-the-docs {
     color: #888;
 }
+
+/* .maze-wrapper {} */
+
+.row {
+    display: flex;
+}
+
+.cell {
+    width: 16px;
+    height: 16px;
+}
