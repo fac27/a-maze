@@ -40,3 +40,26 @@
 .read-the-docs {
     color: #888;
 }
+
+.maze-wrapper {
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    width: 25px;
+    height: 25px;
+}
+
+.wall {
+    background-color: black;
+    color: transparent;
+}
+
+.path {
+    background-color: white;
+}
