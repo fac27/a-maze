@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Maze from './components/Maze.jsx'
 import './App.css'
 import Header from './components/Header'
@@ -12,9 +12,17 @@ function App() {
         emoji: `👿`,
     })
     const [position, setPosition] = useState({ row: 0, column: 0 })
+    const [startTime, setStartTime] = useState(null)
+    const hasStarted = useRef(false)
+    const [hasWon, setHasWon] = useState(false)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
+            if (hasWon) return
+            if (!hasStarted.current) {
+                setStartTime(new Date())
+                hasStarted.current = true
+            }
             // Define a mapping between keys and actions
             const keyMap = {
                 ArrowUp: { row: position.row - 1, column: position.column },
@@ -48,11 +56,15 @@ function App() {
                         cell.style.backgroundColor = '#5d1d1d'
                     }, 500)
                     // else set new position
+                } else if (level1[newPos.row][newPos.column] === 9) {
+                    console.log('winner')
+                    hasStarted.current = false
+                    setHasWon(true)
+                    setPosition(newPos)
                 } else {
                     setPosition(newPos)
                 }
             }
-            return true
         }
         window.addEventListener('keyup', handleKeyUp)
         return () => {
@@ -60,13 +72,13 @@ function App() {
         }
     }
 
-    useEffect(movePlayer, [position])
+    useEffect(movePlayer, [position, hasWon])
 
     return (
         <UserContext.Provider value={[user, setUser]}>
             <Header />
             <Maze position={position} />
-            <Footer />
+            <Footer startTime={startTime} hasWon={hasWon} />
         </UserContext.Provider>
     )
 }
