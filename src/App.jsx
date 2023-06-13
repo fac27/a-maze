@@ -12,28 +12,44 @@ function App() {
         emoji: `👿`,
     })
     const [position, setPosition] = useState({ row: 0, column: 0 })
+
     function movePlayer() {
         const handleKeyUp = (e) => {
             // Define a mapping between keys and actions
             const keyMap = {
-                ArrowUp: { row: position.row -1, column: position.column },
-                ArrowDown: { row: position.row +1, column: position.column },
-                ArrowLeft: { row: position.row, column: position.column -1 },
-                ArrowRight: { row: position.row, column: position.column +1},
+                ArrowUp: { row: position.row - 1, column: position.column },
+                ArrowDown: { row: position.row + 1, column: position.column },
+                ArrowLeft: { row: position.row, column: position.column - 1 },
+                ArrowRight: { row: position.row, column: position.column + 1 },
             }
 
             // Check if the pressed key is in the keyMap
             if (keyMap.hasOwnProperty(e.key)) {
                 const newPos = keyMap[e.key]
 
-                // Verify the new position is within the boundaries and is not a wall
+                // Verify the new position is within the boundaries
                 if (
-                    level1[newPos.row] !== undefined && level1[newPos.row][newPos.column] !== undefined &&
-                    level1[newPos.row][newPos.column] !== 1
+                    level1[newPos.row] === undefined ||
+                    level1[newPos.row][newPos.column] === undefined
                 ) {
+                    const wrapper =
+                        document.getElementsByClassName('maze-wrapper')[0]
+                    wrapper.style.setProperty('outline', '2px solid red')
+                    setTimeout(() => {
+                        wrapper.style.removeProperty('outline')
+                    }, 500)
+                    // verify new pos is not a  wall
+                } else if (level1[newPos.row][newPos.column] === 1) {
+                    const cell = document.getElementById(
+                        `${newPos.row}-${newPos.column}`
+                    )
+                    cell.style.backgroundColor = '#880808'
+                    setTimeout(() => {
+                        cell.style.backgroundColor = '#5d1d1d'
+                    }, 500)
+                    // else set new position
+                } else {
                     setPosition(newPos)
-                } else{
-                   return console.log('bad move')
                 }
             }
             return true

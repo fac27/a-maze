@@ -11,6 +11,7 @@ const Maze = ({ position }) => {
             return (
                 <div
                     key={`${rowIndex}-${columnIndex}`}
+                    id={`${rowIndex}-${columnIndex}`}
                     className={`cell ${column === 1 ? 'wall' : 'path'}`}
                 >
                     {column == 0 ? '' : column}
