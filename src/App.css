@@ -42,8 +42,9 @@
 }
 
 .maze-wrapper {
-    margin-left: 50%;
-    transform: translate(-50%, 0);
+    margin-left: auto;
+    margin-right: auto;
+    max-width:fit-content
 }
 
 .row {

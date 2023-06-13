@@ -13,7 +13,7 @@ function App() {
     })
     const [position, setPosition] = useState({ row: 0, column: 0 })
     function movePlayer() {
-        const handleKeyDown = (e) => {
+        const handleKeyUp = (e) => {
             // Define a mapping between keys and actions
             const keyMap = {
                 ArrowUp: { row: position.row -1, column: position.column },
@@ -38,9 +38,9 @@ function App() {
             }
             return true
         }
-        window.addEventListener('keydown', handleKeyDown)
+        window.addEventListener('keyup', handleKeyUp)
         return () => {
-            window.removeEventListener('keydown', handleKeyDown)
+            window.removeEventListener('keyup', handleKeyUp)
         }
     }
 
