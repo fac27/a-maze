@@ -8,12 +8,17 @@ const Footer = ({ startTime }) => {
         if (startTime) {
             timer = setInterval(() => {
                 const now = new Date()
-                setTimeElapsed(Math.floor((now - startTime) / 1000))
+                const elapsed = Math.floor((now - startTime) / 1000)
+                setTimeElapsed(elapsed)
+                if (elapsed === 10) {
+                    alert('time is up!')
+                    clearInterval(timer)
+                } 
             }, 1000)
         }
 
-        return ()=>{
-            if(timer)clearInterval(timer)
+        return () => {
+            if (timer) clearInterval(timer)
         }
     }, [startTime])
 
