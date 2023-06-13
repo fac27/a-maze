@@ -66,5 +66,5 @@
 
 .player {
     line-height: 0px;
-    /* text-align: center; */
+    background-color: transparent;
 }
