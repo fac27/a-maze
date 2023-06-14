@@ -1,52 +1,36 @@
-import { useEffect, useState } from 'react'
-import InputEmoji from 'react-input-emoji'
+import { useRef } from 'react'
 
-const Login = () => {
-    const [emoji, setEmoji] = useState('')
+const Login = ({setUser, setLoggedIn}) => {
+    const nameRef = useRef();
+    const emojiRef = useRef();
 
-    useEffect(() => {
-        const emojiOutput = document.getElementsByClassName('react-input-emoji--container')[0];
-        if (emojiOutput) {
-          emojiOutput.style.display = 'none';
-        }
-    }, [])
-
-    const handleEmojiChange = (newEmoji) => {
-        const emojiInput = document.getElementsByClassName('react-input-emoji--button')[0];
-
-        setEmoji(newEmoji)
-    }
     const handleSubmit = (e) => {
-        const emoji = document.getElementsByClassName(
-            'class="react-input-emoji--input'
-        )[0].firstChild.innerHTML
-        e.preventDefault()
+        e.preventDefault();
+        const newName = nameRef.current.value;
+        const newEmoji = emojiRef.current.value;
+        setUser({name: newName, emoji: newEmoji})
+        setLoggedIn(true)
     }
+
+
+    const emojis = ['🚀', '🐋', '🦀', '🛁']
+
 
     return (
         <div className="flex modal">
-            <form className="fit-content">
-                <label name="name">Name</label>
-                <input type="text" name="name" />
-                <label name="emoji">emoji</label>
-                <InputEmoji
-                    className=""
-                    value={emoji}
-                    onChange={handleEmojiChange}
-                    // onEnter={handleSubmit}
-                    cleanOnEnter
-                    placeholder=""
-                    maxLength={1}
-                />
-                {emoji && <p>{emoji}</p>}
+            <form className="fit-content" onSubmit={handleSubmit}>
+                <label htmlFor="name">Name</label>
+                <input ref={nameRef} type="text" id="name" name="name" />
+                <label htmlFor="emoji">Emoji</label>
+                <select ref={emojiRef}>
+                <option value="" selected disabled hidden>Choose here</option>
+                    {emojis.map((emoji)=> <option key={emoji} value={emoji}>{emoji} </option>)}
+                </select>
                 <button type="submit">Submit</button>
             </form>
-
         </div>
-        
-
-        
     )
 }
+
 
 export default Login

@@ -15,6 +15,7 @@ function App() {
     })
     const [position, setPosition] = useState({ row: 0, column: 0 })
     const [startTime, setStartTime] = useState(null)
+    const [loggedIn, setLoggedIn] = useState(false)
     const started = useRef(false)
 
     function movePlayer() {
@@ -73,7 +74,11 @@ function App() {
     return (
         <UserContext.Provider value={[user, setUser]}>
             <Header />
-            <Login/>
+            {loggedIn ? (''
+                
+            ) : (
+                <Login setLoggedIn={setLoggedIn} setPosition={setPosition} setUser={setUser}/>
+            )}
             <Maze position={position} />
             <Footer startTime={startTime} />
         </UserContext.Provider>
