@@ -25,7 +25,7 @@ const Login = ({ setUser, setLoggedIn }) => {
                 <input ref={nameRef} type="text" id="name" name="name" />
                 <label htmlFor="emoji">Emoji</label>
                 <select ref={emojiRef}>
-                    <option defaultValue="" selected disabled hidden>
+                    <option defaultValue="" disabled hidden>
                         Choose here
                     </option>
                     {emojis.map((emoji) => (
