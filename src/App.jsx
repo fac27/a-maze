@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { getUser } from '../utils/localStorage.js'
+// import { getUser } from './utils/localStorage.js'
 import Maze from './components/Maze.jsx'
 import './App.css'
 import Header from './components/Header'
@@ -11,12 +11,12 @@ import Win from './components/Win.jsx'
 
 
 function App () {
-    const [user, setUser] = useState(getUser())
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [user, setUser] = useState({})
     const [position, setPosition] = useState({ row: 0, column: 0 })
     const [startTime, setStartTime] = useState(null)
     const hasStarted = useRef(false)
     const [hasWon, setHasWon] = useState(false)
-    const [loggedIn, setLoggedIn] = useState(false)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
@@ -74,6 +74,16 @@ function App () {
     }
 
     useEffect(movePlayer, [position, hasWon])
+    useEffect(() => {
+        const localData = localStorage.getItem('New_Player')
+        if (localData) {
+            setLoggedIn(true)
+            // return JSON.parse(localData)
+            setUser(JSON.parse(localData))
+        }
+        // return {name:'', emoji: '💎'};
+    }, [setLoggedIn])
+
 
     return (
         <UserContext.Provider value={[user, setUser]}>
@@ -83,9 +93,7 @@ function App () {
                 ''
             )}
             <Header user={user}/>
-            {loggedIn ? (''
-                
-            ) : (
+            {!loggedIn && (
                 <Login setLoggedIn={setLoggedIn} setPosition={setPosition} setUser={setUser}/>
             )}
             <Maze position={position} />
