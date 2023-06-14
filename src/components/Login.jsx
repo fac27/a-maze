@@ -9,6 +9,10 @@ const Login = ({ setUser, setLoggedIn }) => {
         const newName = nameRef.current.value
         const newEmoji = emojiRef.current.value
         setUser({ name: newName, emoji: newEmoji })
+        localStorage.setItem(
+            'New_Player',
+            JSON.stringify({ name: newName, emoji: newEmoji })
+        )
         setLoggedIn(true)
     }
 
@@ -16,12 +20,12 @@ const Login = ({ setUser, setLoggedIn }) => {
 
     return (
         <div className="flex modal">
-            <form className="fit-content" onSubmit={handleSubmit}>
+            <form id="login" className="fit-content" onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
                 <input ref={nameRef} type="text" id="name" name="name" />
                 <label htmlFor="emoji">Emoji</label>
                 <select ref={emojiRef}>
-                    <option defaultValue="" disabled hidden>
+                    <option defaultValue="" selected disabled hidden>
                         Choose here
                     </option>
                     {emojis.map((emoji) => (

@@ -9,10 +9,8 @@ import { level1 } from './components/mazes.js'
 import Win from './components/Win.jsx'
 
 function App() {
-    const [user, setUser] = useState({
-        name: 'tom',
-        emoji: `👿`,
-    })
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [user, setUser] = useState({ name: '', emoji: '💎' })
     const [position, setPosition] = useState({ row: 0, column: 0 })
     const [timeElapsed, setTimeElapsed] = useState(0)
     const movesMade = useRef(0)
@@ -25,7 +23,6 @@ function App() {
         ArrowLeft: { row: position.row, column: position.column - 1 },
         ArrowRight: { row: position.row, column: position.column + 1 },
     }
-    const [loggedIn, setLoggedIn] = useState(false)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
@@ -72,6 +69,13 @@ function App() {
     }
 
     useEffect(movePlayer, [position, hasWon])
+    useEffect(() => {
+        const localData = localStorage.getItem('New_Player')
+        if (localData) {
+            setLoggedIn(true)
+            setUser(JSON.parse(localData))
+        }
+    }, [setLoggedIn])
 
     function createTimer(e) {
         if (keyMap.hasOwnProperty(e.key)) {
@@ -111,9 +115,7 @@ function App() {
                 ''
             )}
             <Header user={user} />
-            {loggedIn ? (
-                ''
-            ) : (
+            {!loggedIn && (
                 <Login
                     setLoggedIn={setLoggedIn}
                     setPosition={setPosition}
