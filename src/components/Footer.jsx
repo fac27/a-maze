@@ -13,7 +13,7 @@ const Footer = ({ startTime }) => {
                 if (elapsed === 10) {
                     alert('time is up!')
                     clearInterval(timer)
-                } 
+                }
             }, 1000)
         }
 

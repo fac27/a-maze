@@ -3,8 +3,10 @@ import Maze from './components/Maze.jsx'
 import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Login from './components/Login.jsx'
 import { UserContext } from './Context.js'
 import { level1 } from './components/mazes.js'
+
 
 function App() {
     const [user, setUser] = useState({
@@ -13,7 +15,7 @@ function App() {
     })
     const [position, setPosition] = useState({ row: 0, column: 0 })
     const [startTime, setStartTime] = useState(null)
-    const started = useRef(false) 
+    const started = useRef(false)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
@@ -71,8 +73,9 @@ function App() {
     return (
         <UserContext.Provider value={[user, setUser]}>
             <Header />
+            <Login/>
             <Maze position={position} />
-            <Footer startTime={startTime}/>
+            <Footer startTime={startTime} />
         </UserContext.Provider>
     )
 }
