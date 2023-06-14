@@ -1,6 +1,6 @@
 # a-maze
 
--   a game where the user has to navigate through a maize to get to the next level
+-   a game where the user has to navigate through a maze to get to the next level
 -   the user has to input their name & sprite
 -   the game has a count down
 -   the user must figure out how to navigate on the keyboard without using arrows
@@ -20,6 +20,10 @@ As a user I want to be able to create a username and emoji so that I can differe
 As a user I want to be able to come back and continue where I left off
 As a user I want to feel like I'm back in the 80s and I want to feel like i'm not on a website but playing a game
 As a user I want to be able to play the game and get feedback if I can move in a certain direction (ie. if I walk into a wall I can't go through it and get feedback that it's the wrong way)
+
+#### WireFrame
+![image](https://github.com/fac27/a-maze/assets/62698495/88ab1372-4212-441a-90bf-7bddd6b6e9cc)
+
 
 ## stretch
 
