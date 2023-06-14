@@ -18,6 +18,7 @@ function App() {
     const [timeElapsed, setTimeElapsed] = useState(0)
     const movesMade = useRef(0)
     const [hasWon, setHasWon] = useState(false)
+    const timer = useRef(null)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
@@ -80,6 +81,24 @@ function App() {
     // console.log(movesMade.current)
     useEffect(movePlayer, [position, hasWon])
 
+    useEffect(() => {
+        if (hasWon || !startTime) return clearInterval(timer.current)
+        timer.current = setInterval(() => {
+            const now = new Date()
+            const elapsed = Math.floor((now - startTime) / 1000)
+            setTimeElapsed(elapsed)
+            if (elapsed === 10) {
+                // eslint-disable-next-line no-alert
+                alert('time is up!')
+                clearInterval(timer.current)
+            }
+        }, 1000)
+
+        return () => {
+            return clearInterval(timer.current)
+        }
+    }, [startTime, hasWon, setTimeElapsed])
+
     return (
         <UserContext.Provider value={[user, setUser]}>
             {hasWon ? (
@@ -95,12 +114,7 @@ function App() {
             )}
             <Header />
             <Maze position={position} />
-            <Footer
-                startTime={startTime}
-                hasWon={hasWon}
-                timeElapsed={timeElapsed}
-                setTimeElapsed={setTimeElapsed}
-            />
+            <Footer timeElapsed={timeElapsed} />
         </UserContext.Provider>
     )
 }
