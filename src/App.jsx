@@ -9,7 +9,7 @@ import { level1 } from './components/mazes.js'
 import Win from './components/Win.jsx'
 
 
-const App = () => {
+function App () {
     const [user, setUser] = useState({
         name: 'tom',
         emoji: `👿`,
@@ -18,6 +18,7 @@ const App = () => {
     const [startTime, setStartTime] = useState(null)
     const hasStarted = useRef(false)
     const [hasWon, setHasWon] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
