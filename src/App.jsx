@@ -15,15 +15,13 @@ function App() {
     const [position, setPosition] = useState({ row: 0, column: 0 })
     const [startTime, setStartTime] = useState(null)
     const hasStarted = useRef(false)
+    const [timeElapsed, setTimeElapsed] = useState(0)
+    const movesMade = useRef(0)
     const [hasWon, setHasWon] = useState(false)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
             if (hasWon) return
-            if (!hasStarted.current) {
-                setStartTime(new Date())
-                hasStarted.current = true
-            }
             // Define a mapping between keys and actions
             const keyMap = {
                 ArrowUp: { row: position.row - 1, column: position.column },
@@ -35,20 +33,24 @@ function App() {
             // Check if the pressed key is in the keyMap
             if (keyMap.hasOwnProperty(e.key)) {
                 const newPos = keyMap[e.key]
+                if (!hasStarted.current) {
+                    setStartTime(new Date())
+                    hasStarted.current = true
+                }
 
-                // Verify the new position is within the boundaries
                 if (
                     level1[newPos.row] === undefined ||
                     level1[newPos.row][newPos.column] === undefined
                 ) {
+                    // Verify the new position is within the boundaries
                     const wrapper =
                         document.getElementsByClassName('maze-wrapper')[0]
                     wrapper.style.setProperty('outline', '2px solid red')
                     setTimeout(() => {
                         wrapper.style.removeProperty('outline')
                     }, 500)
-                    // verify new pos is not a  wall
                 } else if (level1[newPos.row][newPos.column] === 1) {
+                    // verify new pos is not a  wall
                     const cell = document.getElementById(
                         `${newPos.row}-${newPos.column}`
                     )
@@ -56,12 +58,15 @@ function App() {
                     setTimeout(() => {
                         cell.style.backgroundColor = '#5d1d1d'
                     }, 500)
-                    // else set new position
                 } else if (level1[newPos.row][newPos.column] === '🏁') {
+                    // WIN
                     setPosition(newPos)
                     hasStarted.current = false
+                    movesMade.current = 0
                     setHasWon(true)
                 } else {
+                    // valid move
+                    movesMade.current++
                     setPosition(newPos)
                 }
             }
@@ -72,18 +77,30 @@ function App() {
         }
     }
 
+    // console.log(movesMade.current)
     useEffect(movePlayer, [position, hasWon])
 
     return (
         <UserContext.Provider value={[user, setUser]}>
             {hasWon ? (
-                <Win setHasWon={setHasWon} setPosition={setPosition} />
+                <Win
+                    setHasWon={setHasWon}
+                    setPosition={setPosition}
+                    movesMade={movesMade}
+                    timeElapsed={timeElapsed}
+                    setTimeElapsed={setTimeElapsed}
+                />
             ) : (
                 ''
             )}
             <Header />
             <Maze position={position} />
-            <Footer startTime={startTime} hasWon={hasWon} />
+            <Footer
+                startTime={startTime}
+                hasWon={hasWon}
+                timeElapsed={timeElapsed}
+                setTimeElapsed={setTimeElapsed}
+            />
         </UserContext.Provider>
     )
 }
