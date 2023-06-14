@@ -30,3 +30,10 @@ As a user I want to be able to play the game and get feedback if I can move in a
 As a user I want obstacles with every level
 As a user I want a way to get rewarded for passing multiple levels
 As an advane vm user, I want a way to find the cheat sheet
+
+## SETUP 
+
+1. clone this repo
+2. ```npm install```
+3. ```npm run dev```
+4. PLAY IT, HAVE FUN!
