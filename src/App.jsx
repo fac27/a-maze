@@ -57,10 +57,9 @@ function App() {
                     }, 500)
                     // else set new position
                 } else if (level1[newPos.row][newPos.column] === 9) {
-                    console.log('winner')
+                    setPosition(newPos)
                     hasStarted.current = false
                     setHasWon(true)
-                    setPosition(newPos)
                 } else {
                     setPosition(newPos)
                 }
