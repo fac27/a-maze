@@ -13,31 +13,27 @@ function App() {
         emoji: `👿`,
     })
     const [position, setPosition] = useState({ row: 0, column: 0 })
-    const [startTime, setStartTime] = useState(null)
-    const hasStarted = useRef(false)
+    // const hasStarted = useRef(false)
     const [timeElapsed, setTimeElapsed] = useState(0)
     const movesMade = useRef(0)
     const [hasWon, setHasWon] = useState(false)
-    const timer = useRef(null)
+
+    const keyMap = {
+        ArrowUp: { row: position.row - 1, column: position.column },
+        ArrowDown: { row: position.row + 1, column: position.column },
+        ArrowLeft: { row: position.row, column: position.column - 1 },
+        ArrowRight: { row: position.row, column: position.column + 1 },
+    }
 
     function movePlayer() {
         const handleKeyUp = (e) => {
             if (hasWon) return
-            // Define a mapping between keys and actions
-            const keyMap = {
-                ArrowUp: { row: position.row - 1, column: position.column },
-                ArrowDown: { row: position.row + 1, column: position.column },
-                ArrowLeft: { row: position.row, column: position.column - 1 },
-                ArrowRight: { row: position.row, column: position.column + 1 },
-            }
-
             // Check if the pressed key is in the keyMap
             if (keyMap.hasOwnProperty(e.key)) {
                 const newPos = keyMap[e.key]
-                if (!hasStarted.current) {
-                    setStartTime(new Date())
-                    hasStarted.current = true
-                }
+                // if (!hasStarted.current) {
+                //     hasStarted.current = true
+                // }
 
                 if (
                     level1[newPos.row] === undefined ||
@@ -62,7 +58,7 @@ function App() {
                 } else if (level1[newPos.row][newPos.column] === '🏁') {
                     // WIN
                     setPosition(newPos)
-                    hasStarted.current = false
+                    // hasStarted.current = false
                     movesMade.current = 0
                     setHasWon(true)
                 } else {
@@ -82,22 +78,19 @@ function App() {
     useEffect(movePlayer, [position, hasWon])
 
     useEffect(() => {
-        if (hasWon || !startTime) return clearInterval(timer.current)
-        timer.current = setInterval(() => {
-            const now = new Date()
-            const elapsed = Math.floor((now - startTime) / 1000)
-            setTimeElapsed(elapsed)
-            if (elapsed === 10) {
-                // eslint-disable-next-line no-alert
-                alert('time is up!')
-                clearInterval(timer.current)
-            }
+        // console.log(hasStarted.current)
+        if (hasWon) return
+        const timer = setInterval(() => {
+            const newTimeElapsed = timeElapsed + 1
+            setTimeElapsed((prev) => prev + 1)
+            if (newTimeElapsed !== 10) return
+            // eslint-disable-next-line no-alert
+            alert('time is up!')
+            clearInterval(timer)
         }, 1000)
-
-        return () => {
-            return clearInterval(timer.current)
-        }
-    }, [startTime, hasWon, setTimeElapsed])
+        // eslint-disable-next-line consistent-return
+        return () => clearInterval(timer)
+    }, [hasWon])
 
     return (
         <UserContext.Provider value={[user, setUser]}>
