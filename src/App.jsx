@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import { UserContext } from './Context.js'
 import { level1 } from './components/mazes.js'
+import Win from './components/Win.jsx'
 
 function App() {
     const [user, setUser] = useState({
@@ -56,7 +57,7 @@ function App() {
                         cell.style.backgroundColor = '#5d1d1d'
                     }, 500)
                     // else set new position
-                } else if (level1[newPos.row][newPos.column] === 9) {
+                } else if (level1[newPos.row][newPos.column] === '🏁') {
                     setPosition(newPos)
                     hasStarted.current = false
                     setHasWon(true)
@@ -75,6 +76,11 @@ function App() {
 
     return (
         <UserContext.Provider value={[user, setUser]}>
+            {hasWon ? (
+                <Win setHasWon={setHasWon} setPosition={setPosition} />
+            ) : (
+                ''
+            )}
             <Header />
             <Maze position={position} />
             <Footer startTime={startTime} hasWon={hasWon} />
