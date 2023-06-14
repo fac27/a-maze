@@ -3,6 +3,7 @@ import Maze from './components/Maze.jsx'
 import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Login from './components/Login.jsx'
 import { UserContext } from './Context.js'
 import { level1 } from './components/mazes.js'
 import Win from './components/Win.jsx'
@@ -24,6 +25,7 @@ function App() {
         ArrowLeft: { row: position.row, column: position.column - 1 },
         ArrowRight: { row: position.row, column: position.column + 1 },
     }
+    const [loggedIn, setLoggedIn] = useState(false)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
@@ -106,7 +108,16 @@ function App() {
             ) : (
                 ''
             )}
-            <Header />
+            <Header user={user} />
+            {loggedIn ? (
+                ''
+            ) : (
+                <Login
+                    setLoggedIn={setLoggedIn}
+                    setPosition={setPosition}
+                    setUser={setUser}
+                />
+            )}
             <Maze position={position} />
             <Footer timeElapsed={timeElapsed} />
         </UserContext.Provider>
