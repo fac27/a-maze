@@ -16,6 +16,7 @@ function App() {
     const [timeElapsed, setTimeElapsed] = useState(0)
     const movesMade = useRef(0)
     const [hasWon, setHasWon] = useState(false)
+    const timer = useRef(null)
 
     const keyMap = {
         ArrowUp: { row: position.row - 1, column: position.column },
@@ -70,18 +71,26 @@ function App() {
 
     useEffect(movePlayer, [position, hasWon])
 
-    useEffect(() => {
-        if (hasWon) return
-        const timer = setInterval(() => {
+    function createTimer(e) {
+        if (keyMap.hasOwnProperty(e.key)) {
+            document.removeEventListener('keyup', createTimer)
+        }
+        timer.current = setInterval(() => {
             const newTimeElapsed = timeElapsed + 1
             setTimeElapsed((prev) => prev + 1)
             if (newTimeElapsed !== 10) return
             // eslint-disable-next-line no-alert
             alert('time is up!')
-            clearInterval(timer)
+            clearInterval(timer.current)
         }, 1000)
+        // return timer
+    }
+
+    useEffect(() => {
+        if (hasWon) return
+        document.addEventListener('keyup', createTimer)
         // eslint-disable-next-line consistent-return
-        return () => clearInterval(timer)
+        return () => clearInterval(timer.current)
     }, [hasWon])
 
     return (
