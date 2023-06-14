@@ -3,11 +3,13 @@ import Maze from './components/Maze.jsx'
 import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Login from './components/Login.jsx'
 import { UserContext } from './Context.js'
 import { level1 } from './components/mazes.js'
 import Win from './components/Win.jsx'
 
-function App() {
+
+function App () {
     const [user, setUser] = useState({
         name: 'tom',
         emoji: `👿`,
@@ -16,6 +18,7 @@ function App() {
     const [startTime, setStartTime] = useState(null)
     const hasStarted = useRef(false)
     const [hasWon, setHasWon] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
@@ -81,7 +84,12 @@ function App() {
             ) : (
                 ''
             )}
-            <Header />
+            <Header user={user}/>
+            {loggedIn ? (''
+                
+            ) : (
+                <Login setLoggedIn={setLoggedIn} setPosition={setPosition} setUser={setUser}/>
+            )}
             <Maze position={position} />
             <Footer startTime={startTime} hasWon={hasWon} />
         </UserContext.Provider>

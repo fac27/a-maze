@@ -27,20 +27,6 @@ a:hover {
 body {
     margin: 0;
 }
-.flex-center {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.flex-center .name {
-    margin-left: 10px;
-}
-.flex-center .score {
-    margin-right: 10px;
-}
-.grey-background {
-    background-color: #535252;
-}
 
 h1 {
     font-size: 3.2em;
