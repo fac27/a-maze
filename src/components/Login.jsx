@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 
 const Login = ({ setUser, setLoggedIn }) => {
-
     const nameRef = useRef()
     const emojiRef = useRef()
 
@@ -10,7 +9,10 @@ const Login = ({ setUser, setLoggedIn }) => {
         const newName = nameRef.current.value
         const newEmoji = emojiRef.current.value
         setUser({ name: newName, emoji: newEmoji })
-        localStorage.setItem('New_Player', JSON.stringify({ name: newName, emoji: newEmoji }))
+        localStorage.setItem(
+            'New_Player',
+            JSON.stringify({ name: newName, emoji: newEmoji })
+        )
         setLoggedIn(true)
     }
 
@@ -23,7 +25,7 @@ const Login = ({ setUser, setLoggedIn }) => {
                 <input ref={nameRef} type="text" id="name" name="name" />
                 <label htmlFor="emoji">Emoji</label>
                 <select ref={emojiRef}>
-                    <option defaultValue="" selected disabled hidden>
+                    <option defaultValue="" disabled hidden>
                         Choose here
                     </option>
                     {emojis.map((emoji) => (

@@ -6,7 +6,7 @@ import Player from './Player.jsx'
 const Maze = ({ position }) => {
     const userCheckPosition = (row, rowIndex, column, columnIndex) => {
         if (position.row === rowIndex && position.column === columnIndex) {
-            return <Player />
+            return <Player key={`row-${rowIndex}`} />
         } else {
             return (
                 <div

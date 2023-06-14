@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { UserContext } from '../Context.js'
 
-const Player = () => {
+const Player = (key) => {
     const [user] = useContext(UserContext)
     return (
-        <div key="me" className="cell player path">
+        <div key={key} className="cell player path">
             <p>{user.emoji}</p>
         </div>
     )
