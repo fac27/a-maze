@@ -8,7 +8,7 @@ import { UserContext } from './Context.js'
 import { level1 } from './components/mazes.js'
 
 
-function App() {
+const App = () => {
     const [user, setUser] = useState({
         name: 'tom',
         emoji: `👿`,
@@ -73,7 +73,7 @@ function App() {
 
     return (
         <UserContext.Provider value={[user, setUser]}>
-            <Header />
+            <Header user={user}/>
             {loggedIn ? (''
                 
             ) : (
