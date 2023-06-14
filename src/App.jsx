@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from 'react'
-// import { getUser } from './utils/localStorage.js'
 import Maze from './components/Maze.jsx'
 import './App.css'
 import Header from './components/Header'
@@ -12,7 +11,7 @@ import Win from './components/Win.jsx'
 
 function App () {
     const [loggedIn, setLoggedIn] = useState(false)
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({name: '', emoji: '💎'})
     const [position, setPosition] = useState({ row: 0, column: 0 })
     const [startTime, setStartTime] = useState(null)
     const hasStarted = useRef(false)
@@ -78,10 +77,8 @@ function App () {
         const localData = localStorage.getItem('New_Player')
         if (localData) {
             setLoggedIn(true)
-            // return JSON.parse(localData)
             setUser(JSON.parse(localData))
         }
-        // return {name:'', emoji: '💎'};
     }, [setLoggedIn])
 
 
