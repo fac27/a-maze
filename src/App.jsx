@@ -13,7 +13,6 @@ function App() {
         emoji: `👿`,
     })
     const [position, setPosition] = useState({ row: 0, column: 0 })
-    // const hasStarted = useRef(false)
     const [timeElapsed, setTimeElapsed] = useState(0)
     const movesMade = useRef(0)
     const [hasWon, setHasWon] = useState(false)
@@ -31,10 +30,6 @@ function App() {
             // Check if the pressed key is in the keyMap
             if (keyMap.hasOwnProperty(e.key)) {
                 const newPos = keyMap[e.key]
-                // if (!hasStarted.current) {
-                //     hasStarted.current = true
-                // }
-
                 if (
                     level1[newPos.row] === undefined ||
                     level1[newPos.row][newPos.column] === undefined
@@ -73,11 +68,9 @@ function App() {
         }
     }
 
-    // console.log(movesMade.current)
     useEffect(movePlayer, [position, hasWon])
 
     useEffect(() => {
-        // console.log(hasStarted.current)
         if (hasWon) return
         const timer = setInterval(() => {
             const newTimeElapsed = timeElapsed + 1
