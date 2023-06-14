@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { getUser } from '../utils/localStorage.js'
 import Maze from './components/Maze.jsx'
 import './App.css'
 import Header from './components/Header'
@@ -10,10 +11,7 @@ import Win from './components/Win.jsx'
 
 
 function App () {
-    const [user, setUser] = useState({
-        name: 'tom',
-        emoji: `👿`,
-    })
+    const [user, setUser] = useState(getUser())
     const [position, setPosition] = useState({ row: 0, column: 0 })
     const [startTime, setStartTime] = useState(null)
     const hasStarted = useRef(false)
