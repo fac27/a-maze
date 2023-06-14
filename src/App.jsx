@@ -85,6 +85,8 @@ function App() {
             alert('time is up!')
             clearInterval(timer.current)
         }, 1000)
+        document.removeEventListener('keyup', createTimer)
+
         // return timer
     }
 
