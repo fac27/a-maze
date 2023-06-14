@@ -13,13 +13,15 @@ function App() {
     })
     const [position, setPosition] = useState({ row: 0, column: 0 })
     const [startTime, setStartTime] = useState(null)
-    const started = useRef(false) 
+    const hasStarted = useRef(false)
+    const [hasWon, setHasWon] = useState(false)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
-            if (!started.current) {
+            if (hasWon) return
+            if (!hasStarted.current) {
                 setStartTime(new Date())
-                started.current = true
+                hasStarted.current = true
             }
             // Define a mapping between keys and actions
             const keyMap = {
@@ -54,11 +56,14 @@ function App() {
                         cell.style.backgroundColor = '#5d1d1d'
                     }, 500)
                     // else set new position
+                } else if (level1[newPos.row][newPos.column] === 9) {
+                    setPosition(newPos)
+                    hasStarted.current = false
+                    setHasWon(true)
                 } else {
                     setPosition(newPos)
                 }
             }
-            return true
         }
         window.addEventListener('keyup', handleKeyUp)
         return () => {
@@ -66,13 +71,13 @@ function App() {
         }
     }
 
-    useEffect(movePlayer, [position])
+    useEffect(movePlayer, [position, hasWon])
 
     return (
         <UserContext.Provider value={[user, setUser]}>
             <Header />
             <Maze position={position} />
-            <Footer startTime={startTime}/>
+            <Footer startTime={startTime} hasWon={hasWon} />
         </UserContext.Provider>
     )
 }
