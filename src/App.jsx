@@ -59,7 +59,6 @@ function App() {
                     // WIN
                     setPosition(newPos)
                     // hasStarted.current = false
-                    movesMade.current = 0
                     setHasWon(true)
                 } else {
                     // valid move
