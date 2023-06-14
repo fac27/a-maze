@@ -10,15 +10,12 @@ import Win from './components/Win.jsx'
 
 
 function App () {
-    const [user, setUser] = useState({
-        name: 'tom',
-        emoji: `👿`,
-    })
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [user, setUser] = useState({name: '', emoji: '💎'})
     const [position, setPosition] = useState({ row: 0, column: 0 })
     const [startTime, setStartTime] = useState(null)
     const hasStarted = useRef(false)
     const [hasWon, setHasWon] = useState(false)
-    const [loggedIn, setLoggedIn] = useState(false)
 
     function movePlayer() {
         const handleKeyUp = (e) => {
@@ -76,6 +73,14 @@ function App () {
     }
 
     useEffect(movePlayer, [position, hasWon])
+    useEffect(() => {
+        const localData = localStorage.getItem('New_Player')
+        if (localData) {
+            setLoggedIn(true)
+            setUser(JSON.parse(localData))
+        }
+    }, [setLoggedIn])
+
 
     return (
         <UserContext.Provider value={[user, setUser]}>
@@ -85,9 +90,7 @@ function App () {
                 ''
             )}
             <Header user={user}/>
-            {loggedIn ? (''
-                
-            ) : (
+            {!loggedIn && (
                 <Login setLoggedIn={setLoggedIn} setPosition={setPosition} setUser={setUser}/>
             )}
             <Maze position={position} />
