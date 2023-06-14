@@ -8,8 +8,6 @@ const Footer = ({ startTime, hasWon }) => {
         if (!startTime) return
         // eslint-disable-next-line consistent-return
         if (hasWon) {
-            // eslint-disable-next-line no-alert
-            alert(timeElapsed)
             // eslint-disable-next-line consistent-return
             return clearInterval(timer)
         }
@@ -18,6 +16,7 @@ const Footer = ({ startTime, hasWon }) => {
             const elapsed = Math.floor((now - startTime) / 1000)
             setTimeElapsed(elapsed)
             if (elapsed === 10) {
+                // eslint-disable-next-line no-alert
                 alert('time is up!')
                 clearInterval(timer)
             }

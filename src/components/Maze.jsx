@@ -12,7 +12,9 @@ const Maze = ({ position }) => {
                 <div
                     key={`${rowIndex}-${columnIndex}`}
                     id={`${rowIndex}-${columnIndex}`}
-                    className={`cell ${column === 1 ? 'wall' : 'path'}`}
+                    className={`cell ${column === '🏁' ? 'win-cell' : ''} ${
+                        column === 1 ? 'wall' : ''
+                    }`}
                 >
                     {column == 0 ? '' : column}
                 </div>
@@ -23,7 +25,7 @@ const Maze = ({ position }) => {
     return (
         <div className="maze-wrapper">
             {level1.map((row, rowIndex) => (
-                <div key={`row${rowIndex}`} className="row">
+                <div key={`row-${rowIndex}`} className="row">
                     {row.map((column, columnIndex) =>
                         userCheckPosition(row, rowIndex, column, columnIndex)
                     )}
