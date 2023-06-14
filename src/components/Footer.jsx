@@ -1,26 +1,32 @@
 import { useEffect, useState } from 'react'
 
-const Footer = ({ startTime }) => {
+const Footer = ({ startTime, hasWon }) => {
     const [timeElapsed, setTimeElapsed] = useState(0)
 
     useEffect(() => {
         let timer = null
-        if (startTime) {
-            timer = setInterval(() => {
-                const now = new Date()
-                const elapsed = Math.floor((now - startTime) / 1000)
-                setTimeElapsed(elapsed)
-                if (elapsed === 10) {
-                    alert('time is up!')
-                    clearInterval(timer)
-                }
-            }, 1000)
+        if (!startTime) return
+        // eslint-disable-next-line consistent-return
+        if (hasWon) {
+            // eslint-disable-next-line consistent-return
+            return clearInterval(timer)
         }
+        timer = setInterval(() => {
+            const now = new Date()
+            const elapsed = Math.floor((now - startTime) / 1000)
+            setTimeElapsed(elapsed)
+            if (elapsed === 10) {
+                // eslint-disable-next-line no-alert
+                alert('time is up!')
+                clearInterval(timer)
+            }
+        }, 1000)
 
+        // eslint-disable-next-line consistent-return
         return () => {
-            if (timer) clearInterval(timer)
+            clearInterval(timer)
         }
-    }, [startTime])
+    }, [startTime, hasWon, timeElapsed])
 
     return (
         <footer className="flex-center grey-background">

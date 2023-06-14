@@ -41,6 +41,7 @@
     margin-left: auto;
     margin-right: auto;
     max-width: fit-content;
+    background-color: #008000;
 }
 
 .row {
@@ -57,14 +58,37 @@
     color: transparent;
 }
 
-.path {
+/* .path {
     background-color: #008000;
+} */
+
+.win-cell {
+    animation: wiggle 1.5s infinite;
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+    80% {
+        transform: rotate(0deg);
+    }
+    85% {
+        transform: rotate(25deg);
+    }
+    95% {
+        transform: rotate(-25deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 .player {
     line-height: 0px;
 }
-.modal{
+
+.modal {
     position: fixed;
     max-width: 200px;
     max-height: 100px;
@@ -72,9 +96,10 @@
     margin-top: -50px;
     top: 50%;
     left: 50%;
-    background: turquoise;
+    background-color: cadetblue;
     padding: 30px;
 }
+
 .modal :first-child {
     margin-top: 0px;
 }
