@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Confetti from 'react-confetti'
 
+const MAX_SCORE = 100000
+
 export default function Win({
     setHasWon,
     setPosition,
@@ -14,7 +16,6 @@ export default function Win({
         setTimeElapsed(0)
         movesMade.current = 0
     }
-
     return (
         <>
             <Confetti width={window.innerWidth} height={window.innerHeight} />
@@ -22,7 +23,7 @@ export default function Win({
                 <h2> YoU bEAt mE !</h2>
                 <h3 className="shout">
                     SCORE:{' '}
-                    {Math.floor(movesMade.current / timeElapsed / timeElapsed)}
+                    {Math.floor(MAX_SCORE / timeElapsed / movesMade.current)}
                 </h3>
                 <button className="restart-btn" onClick={restart}>
                     wont beat me again!
