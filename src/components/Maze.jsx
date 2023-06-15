@@ -14,7 +14,13 @@ const UserCheckPosition = ({ rowIndex, column, columnIndex, position }) => {
                 column === '🏁' ? 'win-cell' : column === 1 ? 'wall' : ''
             }`}
         >
-            {column != 0 && column}
+            {column == 1 ? (
+                <img src="./bush.png" alt="1" className="cell" />
+            ) : column == 9 ? (
+                '🏁'
+            ) : (
+                <img src="./path.png" alt="0" className="cell" />
+            )}
         </div>
     )
 }

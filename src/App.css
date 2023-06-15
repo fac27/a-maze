@@ -20,7 +20,6 @@
     background-color: #535252;
 }
 
-
 .card {
     padding: 2em;
 }
@@ -28,20 +27,19 @@
 .read-the-docs {
     color: #888;
 }
-.fit-content{
+.fit-content {
     max-width: fit-content;
 }
-.flex{
+.flex {
     display: flex;
     align-items: center;
-
 }
 
 .maze-wrapper {
     margin-left: auto;
     margin-right: auto;
     max-width: fit-content;
-    background-color: #008000;
+    background-color: grey;
 }
 
 .row {
@@ -54,7 +52,6 @@
 }
 
 .wall {
-    background-color: #5d1d1d;
     color: transparent;
 }
 
@@ -64,6 +61,8 @@
 
 .win-cell {
     animation: wiggle 1.5s infinite;
+    /* background-image: url('./path.png');
+    background-size: 25px; */
 }
 
 @keyframes wiggle {
@@ -86,6 +85,8 @@
 
 .player {
     line-height: 0px;
+    background-image: url('./path.png');
+    background-size: 25px;
 }
 
 .modal {
