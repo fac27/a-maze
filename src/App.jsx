@@ -10,7 +10,7 @@ import Win from './components/Win.jsx'
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false)
-    const [user, setUser] = useState({ name: '', emoji: '💎' })
+    const [user, setUser] = useState({ name: 'asd', emoji: '💎' })
     const [position, setPosition] = useState({ row: 0, column: 0 })
     const [timeElapsed, setTimeElapsed] = useState(0)
     const movesMade = useRef(0)
