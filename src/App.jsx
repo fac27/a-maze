@@ -17,15 +17,22 @@ function App() {
     const [hasWon, setHasWon] = useState(false)
     const timer = useRef(null)
 
-    const keyMap = {
-        ArrowUp: { row: position.row - 1, column: position.column },
-        ArrowDown: { row: position.row + 1, column: position.column },
-        ArrowLeft: { row: position.row, column: position.column - 1 },
-        ArrowRight: { row: position.row, column: position.column + 1 },
-    }
+    // const keyMap = {
+    //     ArrowUp: { row: position.row - 1, column: position.column },
+    //     ArrowDown: { row: position.row + 1, column: position.column },
+    //     ArrowLeft: { row: position.row, column: position.column - 1 },
+    //     ArrowRight: { row: position.row, column: position.column + 1 },
+    // }
 
     function movePlayer() {
         const handleKeyUp = (e) => {
+            const keyMap = {
+                ArrowUp: { row: position.row - 1, column: position.column },
+                ArrowDown: { row: position.row + 1, column: position.column },
+                ArrowLeft: { row: position.row, column: position.column - 1 },
+                ArrowRight: { row: position.row, column: position.column + 1 },
+            }
+            
             if (hasWon) return
             // Check if the pressed key is in the keyMap
             if (keyMap.hasOwnProperty(e.key)) {
@@ -78,9 +85,11 @@ function App() {
     }, [setLoggedIn])
 
     function createTimer(e) {
-        if (keyMap.hasOwnProperty(e.key)) {
-            document.removeEventListener('keyup', createTimer)
+        if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+            return;
         }
+        document.removeEventListener('keyup', createTimer)
+
         timer.current = setInterval(() => {
             const newTimeElapsed = timeElapsed + 1
             setTimeElapsed((prev) => prev + 1)
