@@ -3,6 +3,22 @@
 import { level1 } from './mazes.js'
 import Player from './Player.jsx'
 
+const UserCheckPosition = ({ rowIndex, column, columnIndex, position }) => {
+    if (position.row === rowIndex && position.column === columnIndex) {
+        return <Player />
+    }
+    return (
+        <div
+            id={`${rowIndex}-${columnIndex}`}
+            className={`cell ${
+                column === '🏁' ? 'win-cell' : column === 1 ? 'wall' : ''
+            }`}
+        >
+            {column != 0 && column}
+        </div>
+    )
+}
+
 export default function Maze({ position }) {
     return (
         <div className="maze-wrapper">
@@ -21,21 +37,4 @@ export default function Maze({ position }) {
             ))}
         </div>
     )
-}
-
-const UserCheckPosition = (rowIndex, column, columnIndex, position) => {
-    if (position.row === rowIndex && position.column === columnIndex) {
-        return <Player />
-    } else {
-        return (
-            <div
-                id={`${rowIndex}-${columnIndex}`}
-                className={`cell ${
-                    column === '🏁' ? 'win-cell' : column === 1 && 'wall'
-                }`}
-            >
-                {column != 0 && column}
-            </div>
-        )
-    }
 }
