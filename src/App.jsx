@@ -11,7 +11,7 @@ import Win from './components/Win.jsx'
 function App() {
     const [loggedIn, setLoggedIn] = useState(false)
     const [user, setUser] = useState({ name: 'asd', emoji: '💎' })
-    const [position, setPosition] = useState({ row: 0, column: 0 })
+    const [position, setPosition] = useState({ row: 1, column: 1 })
     const [timeElapsed, setTimeElapsed] = useState(0)
     const movesMade = useRef(0)
     const [hasWon, setHasWon] = useState(false)
@@ -99,8 +99,6 @@ function App() {
             clearInterval(timer.current)
         }, 1000)
         document.removeEventListener('keyup', createTimer)
-
-        // return timer
     }
 
     useEffect(() => {
@@ -123,7 +121,11 @@ function App() {
             ) : (
                 ''
             )}
-            <Header user={user} />
+            <Header
+                user={user}
+                timeElapsed={timeElapsed}
+                movesMade={movesMade}
+            />
             {!loggedIn && (
                 <Login
                     setLoggedIn={setLoggedIn}
