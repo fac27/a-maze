@@ -3,35 +3,39 @@
 import { level1 } from './mazes.js'
 import Player from './Player.jsx'
 
-const Maze = ({ position }) => {
-    const userCheckPosition = (row, rowIndex, column, columnIndex) => {
-        if (position.row === rowIndex && position.column === columnIndex) {
-            return <Player key={`row-${rowIndex}`} />
-        } else {
-            return (
-                <div
-                    key={`${rowIndex}-${columnIndex}`}
-                    id={`${rowIndex}-${columnIndex}`}
-                    className={`cell ${column === '🏁' ? 'win-cell' : ''} ${
-                        column === 1 ? 'wall' : ''
-                    }`}
-                >
-                    {column == 0 ? '' : column}
-                </div>
-            )
-        }
-    }
-
+export default function Maze({ position }) {
     return (
         <div className="maze-wrapper">
             {level1.map((row, rowIndex) => (
                 <div key={`row-${rowIndex}`} className="row">
-                    {row.map((column, columnIndex) =>
-                        userCheckPosition(row, rowIndex, column, columnIndex)
-                    )}
+                    {row.map((column, columnIndex) => (
+                        <UserCheckPosition
+                            key={`${rowIndex}-${columnIndex}`}
+                            rowIndex={rowIndex}
+                            column={column}
+                            columnIndex={columnIndex}
+                            position={position}
+                        />
+                    ))}
                 </div>
             ))}
         </div>
     )
 }
-export default Maze
+
+const UserCheckPosition = (rowIndex, column, columnIndex, position) => {
+    if (position.row === rowIndex && position.column === columnIndex) {
+        return <Player />
+    } else {
+        return (
+            <div
+                id={`${rowIndex}-${columnIndex}`}
+                className={`cell ${
+                    column === '🏁' ? 'win-cell' : column === 1 && 'wall'
+                }`}
+            >
+                {column != 0 && column}
+            </div>
+        )
+    }
+}
