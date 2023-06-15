@@ -1,39 +1,36 @@
-import { useRef } from 'react'
+import { useState} from 'react'
+const emojis = ['🚀', '🐋', '🦀', '🛁']
 
 const Login = ({ setUser, setLoggedIn }) => {
-    const nameRef = useRef()
-    const emojiRef = useRef()
+const [name, setName] = useState('')
+const[newEmoji, setNewEmoji] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const newName = nameRef.current.value
-        const newEmoji = emojiRef.current.value
-        setUser({ name: newName, emoji: newEmoji })
+        setUser({ name, emoji: newEmoji })
         localStorage.setItem(
             'New_Player',
-            JSON.stringify({ name: newName, emoji: newEmoji })
+            JSON.stringify({ name, emoji: newEmoji })
         )
         setLoggedIn(true)
     }
-
-    const emojis = ['🚀', '🐋', '🦀', '🛁']
 
     return (
         <div className="flex modal">
             <form id="login" className="fit-content" onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
-                <input ref={nameRef} type="text" id="name" name="name" />
+                <input autoComplete='off'value ={name} id='name' onChange={(e)=> setName(e.target.value)} />
                 <label htmlFor="emoji">Emoji</label>
-                <select ref={emojiRef}>
-                    <option defaultValue="" disabled hidden>
-                        Choose here
+                <select id='emoji' value={newEmoji} onChange={(e)=> setNewEmoji(e.target.value)}>
+                <option value="" disabled hidden>
+                    Choose here
+                </option>
+                {emojis.map((emoji) => (
+                    <option key={emoji} value={emoji}>
+                        {emoji}
                     </option>
-                    {emojis.map((emoji) => (
-                        <option key={emoji} value={emoji}>
-                            {emoji}{' '}
-                        </option>
-                    ))}
-                </select>
+                ))}
+            </select>
                 <button type="submit">Submit</button>
             </form>
         </div>
