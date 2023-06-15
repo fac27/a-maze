@@ -61,8 +61,8 @@
 
 .win-cell {
     animation: wiggle 1.5s infinite;
-    /* background-image: url('./path.png');
-    background-size: 25px; */
+    background-image: url('./path.png');
+    background-size: 25px;
 }
 
 @keyframes wiggle {

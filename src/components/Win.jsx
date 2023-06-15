@@ -13,7 +13,7 @@ export default function Win({
     const score = Math.floor(MAX_SCORE / timeElapsed / movesMade.current)
 
     function restart() {
-        setPosition({ row: 0, column: 0 })
+        setPosition({ row: 1, column: 1 })
         setHasWon(false)
         setTimeElapsed(0)
         movesMade.current = 0
