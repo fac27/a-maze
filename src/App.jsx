@@ -32,7 +32,7 @@ function App() {
                 ArrowLeft: { row: position.row, column: position.column - 1 },
                 ArrowRight: { row: position.row, column: position.column + 1 },
             }
-            
+
             if (hasWon) return
             // Check if the pressed key is in the keyMap
             if (keyMap.hasOwnProperty(e.key)) {
@@ -41,21 +41,22 @@ function App() {
                     level1[newPos.row] === undefined ||
                     level1[newPos.row][newPos.column] === undefined
                 ) {
-                    // Verify the new position is within the boundaries
-                    const wrapper =
-                        document.getElementsByClassName('maze-wrapper')[0]
-                    wrapper.style.setProperty('outline', '2px solid red')
-                    setTimeout(() => {
-                        wrapper.style.removeProperty('outline')
-                    }, 500)
+                    return
+                    // // Verify the new position is within the boundaries
+                    // const wrapper =
+                    //     document.getElementsByClassName('maze-wrapper')[0]
+                    // wrapper.style.setProperty('outline', '2px solid red')
+                    // setTimeout(() => {
+                    //     wrapper.style.removeProperty('outline')
+                    // }, 500)
                 } else if (level1[newPos.row][newPos.column] === 1) {
                     // verify new pos is not a  wall
                     const cell = document.getElementById(
                         `${newPos.row}-${newPos.column}`
                     )
-                    cell.style.backgroundColor = '#880808'
+                    cell.style.filter = 'invert(100%)'
                     setTimeout(() => {
-                        cell.style.backgroundColor = '#5d1d1d'
+                        cell.style.filter = ''
                     }, 500)
                 } else if (level1[newPos.row][newPos.column] === '🏁') {
                     // WIN
@@ -85,8 +86,10 @@ function App() {
     }, [setLoggedIn])
 
     function createTimer(e) {
-        if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-            return;
+        if (
+            !['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)
+        ) {
+            return
         }
         document.removeEventListener('keyup', createTimer)
 
