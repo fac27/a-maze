@@ -78,7 +78,7 @@ function App() {
     }, [setLoggedIn])
 
     function createTimer(e) {
-        if (keyMap.hasOwnProperty(e.key)) {
+        if (keyMap.hasOwnProperty(e.key) && !timer.current) {
             document.removeEventListener('keyup', createTimer)
         }
         timer.current = setInterval(() => {
